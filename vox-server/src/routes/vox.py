@@ -1,3 +1,4 @@
+from datetime import UTC, datetime
 from pathlib import Path
 from shutil import rmtree
 from tempfile import mkdtemp
@@ -27,7 +28,8 @@ def synthesize_voicevox(
 
     temp_dir = mkdtemp()
     background_tasks.add_task(rmtree, temp_dir)
-    dst_file_name = "output.wav"
+    timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
+    dst_file_name = f"generated_{timestamp}.wav"
     dst_file_path = Path(temp_dir) / dst_file_name
     with dst_file_path.open("wb") as f:
         f.write(wav)
