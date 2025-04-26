@@ -1,0 +1,22 @@
+services:
+  vox-server:
+    build:
+      context: ./vox-server
+      target: development
+      args:
+        PLATFORM: linux
+        PYTHON_VERSION: 3.11.11
+    ports:
+      - 8000:8000
+    environment:
+      VOICEVOX_CORE_PATH: "./voicevox_core"
+
+    volumes:
+      - ./vox-server:/app
+      - vox-server-venv:/app/.venv
+    command:
+      ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--log-config", "src/logging.ini", "--reload"]
+    tty: true
+
+volumes:
+  vox-server-venv:
