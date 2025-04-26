@@ -2,6 +2,20 @@ version = 1
 requires-python = ">=3.11"
 
 [[package]]
+name = "voicevox-core"
+version = "0.16.0"
+source = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-macosx_11_0_arm64.whl" }
+wheels = [
+    { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:bb42efbc04bbed2f2011f5e29e9c99fbfcd16bb50e7838739266e8929036ad2f" },
+]
+
+[[package]]
 name = "vox-server"
 version = "0.1.0"
 source = { virtual = "." }
+dependencies = [
+    { name = "voicevox-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "voicevox-core", url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-macosx_11_0_arm64.whl" }]
