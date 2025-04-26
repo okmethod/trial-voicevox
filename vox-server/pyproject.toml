@@ -7,6 +7,7 @@ requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115.12",
     "uvicorn>=0.34.2",
+    "voicevox-core",
 ]
 
 [dependency-groups]
@@ -16,20 +17,10 @@ dev = [
     "ruff>=0.11.7",
 ]
 
-[[tool.uv.index]]
-name = "voicevox-core-macos"
-url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-macosx_11_0_arm64.whl"
-explicit = false
-
-[[tool.uv.index]]
-name = "voicevox-core-linux"
-url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-manylinux_2_34_x86_64.whl"
-explicit = false
-
 [tool.uv.sources]
 voicevox-core = [
-  { index = "voicevox-core-macos", marker = "platform_system == 'Darwin'" },
-  { index = "voicevox-core-linux", marker = "platform_system == 'Linux'" },
+  { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-macosx_11_0_arm64.whl", marker = "platform_system == 'Darwin'" },
+  { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-manylinux_2_34_x86_64.whl", marker = "platform_system != 'Darwin'" },
 ]
 
 #### Poe the Poet Defining tasks ####

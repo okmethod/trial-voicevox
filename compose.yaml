@@ -1,5 +1,6 @@
 services:
   vox-server:
+    platform: linux/amd64
     build:
       context: ./vox-server
       target: development
