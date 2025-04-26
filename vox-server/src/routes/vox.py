@@ -5,10 +5,11 @@ from tempfile import mkdtemp
 from fastapi import APIRouter, BackgroundTasks
 from fastapi.responses import FileResponse
 
-from src.internal.synthesizer import synthesize
+from src.internal.synthesizer import SynthesizerSingleton, synthesize
 from src.schemas.vox import VoxRequest
 
 router = APIRouter()
+SynthesizerSingleton.initialize_synthesizer()
 
 
 @router.post(

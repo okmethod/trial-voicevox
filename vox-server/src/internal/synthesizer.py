@@ -12,7 +12,7 @@ class SynthesizerSingleton:
     _loaded_models: ClassVar[set[str]] = set()
 
     @classmethod
-    def _initialize_synthesizer(cls) -> Synthesizer:
+    def initialize_synthesizer(cls) -> Synthesizer:
         settings = get_settings()
         voicevox_onnxruntime_path = (
             settings.voicevox_core_path / "onnxruntime" / "lib" / Onnxruntime.LIB_VERSIONED_FILENAME  # type: ignore[attr-defined]
@@ -28,7 +28,7 @@ class SynthesizerSingleton:
         if cls._instance is None:
             with cls._lock:
                 if cls._instance is None:  # ダブルチェックロック
-                    cls._instance = cls._initialize_synthesizer()
+                    cls._instance = cls.initialize_synthesizer()
         return cls._instance
 
     @classmethod
