@@ -11,9 +11,8 @@ services:
       - 8000:8000
     environment:
       VOICEVOX_CORE_PATH: "./voicevox_core"
-
     volumes:
-      - ./vox-server:/app
+      - ./vox-server/src:/app/src
       - vox-server-venv:/app/.venv
     command:
       ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--log-config", "src/logging.ini", "--reload"]
