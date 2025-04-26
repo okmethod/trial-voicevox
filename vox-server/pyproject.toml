@@ -4,9 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "voicevox-core",
-]
+dependencies = []
 
 [dependency-groups]
 dev = [
@@ -15,8 +13,21 @@ dev = [
     "ruff>=0.11.7",
 ]
 
+[[tool.uv.index]]
+name = "voicevox-core-macos"
+url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-macosx_11_0_arm64.whl"
+explicit = false
+
+[[tool.uv.index]]
+name = "voicevox-core-linux"
+url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-manylinux_2_34_x86_64.whl"
+explicit = false
+
 [tool.uv.sources]
-voicevox-core = { url = "https://github.com/VOICEVOX/voicevox_core/releases/download/0.16.0/voicevox_core-0.16.0-cp310-abi3-macosx_11_0_arm64.whl" }
+voicevox-core = [
+  { index = "voicevox-core-macos", marker = "platform_system == 'Darwin'" },
+  { index = "voicevox-core-linux", marker = "platform_system == 'Linux'" },
+]
 
 #### Poe the Poet Defining tasks ####
 # https://poethepoet.natn.io/tasks/index.html
