@@ -3,7 +3,7 @@
 手順
 https://github.com/VOICEVOX/voicevox_core/blob/main/docs/guide/user/usage.md
 
-## セットアップ手順のメモ
+## MacOS向け VOICEVOXセットアップメモ
 
 ### uvプロジェクト作成
 ```sh
