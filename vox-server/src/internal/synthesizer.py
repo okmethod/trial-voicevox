@@ -1,4 +1,3 @@
-from pathlib import Path
 from threading import Lock
 from typing import ClassVar
 
@@ -48,12 +47,7 @@ class SynthesizerSingleton:
             raise RuntimeError(error_message)
 
 
-def synthesize(dst_file_path: Path, target_text: str) -> None:
+def synthesize(model_name: str, style_id: int, target_text: str) -> bytes:
     synthesizer = SynthesizerSingleton.get_instance()
-
-    SynthesizerSingleton.load_model("0.vvm")
-
-    style_id = 3  # ずんだもん/ノーマル
-    wav = synthesizer.tts(target_text, style_id)
-    with dst_file_path.open("wb") as f:
-        f.write(wav)
+    SynthesizerSingleton.load_model(model_name)
+    return synthesizer.tts(target_text, style_id)

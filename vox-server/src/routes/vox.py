@@ -19,14 +19,17 @@ def synthesize_voicevox(
     background_tasks: BackgroundTasks,
     request_body: VoxRequest,
 ) -> FileResponse:
+    wav = synthesize(
+        model_name=request_body.model or "0.vvm",
+        style_id=request_body.style or 3,  # ずんだもん/ノーマル
+        target_text=request_body.text,
+    )
+
     temp_dir = mkdtemp()
     background_tasks.add_task(rmtree, temp_dir)
     dst_file_name = "output.wav"
     dst_file_path = Path(temp_dir) / dst_file_name
-
-    synthesize(
-        dst_file_path=dst_file_path,
-        target_text=request_body.text,
-    )
+    with dst_file_path.open("wb") as f:
+        f.write(wav)
 
     return FileResponse(path=dst_file_path, filename=dst_file_name)
